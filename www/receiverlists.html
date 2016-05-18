@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择收件人</title>
+    <link href="../css/reset.css" rel="stylesheet"/>
+    <link href="../css/font/iconfont.css" rel="stylesheet"/>
+    <link href="../css/receiverlists.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="receiverlist-container">
+        <div class="choose-recelists">
+          <!-- 顶部搜索 -->
+          <div class="search-box">
+              <i class="iconfont icon-sousuo"></i>
+              <input type="text" name="search" class="search" placeholder="搜索姓名">
+          </div>
+
+          <!-- 中间收信人列表 -->
+          <div class="recelists-box">
+              <ul>
+                  <li>
+                      <input type="checkbox" name="sxr" class="selectSxr" />
+                      <span class="sxr-name">张三</span>
+                      <span class="sxr-name">(14602368)</span>
+                  </li>
+                  <li>
+                      <input type="checkbox" name="sxr" class="selectSxr" />
+                      <span class="sxr-name">张三</span>
+                      <span class="sxr-name">(14602368)</span>
+                  </li>
+                  <li>
+                      <input type="checkbox" name="sxr" class="selectSxr" />
+                      <span class="sxr-name">张三</span>
+                      <span class="sxr-stuno">(14602368)</span>
+                  </li>
+              </ul>
+          </div>
+          <!-- 底部全选按钮和分页 -->
+          <div class="page-all">
+              <div class="selectedAll">
+                  <input type="checkbox" name="selectAll" class="selectAll" />全选
+              </div>
+              <div class="page">
+                  <a href="#" class="page-prev mar-10"><i class="iconfont icon-navigatebefore"></i></a>
+                  <a href="#" class="lineto mar-10"><input type="text" class="current" value="1"/></a>
+                  <span class="mar-10">/</span>
+                  <span class="page-total mar-10">30</span>
+                  <a href="#" class="page-next"><i class="iconfont icon-navigatenext"></i></a>
+              </div>
+          </div>
+        </div>
+        <!--右侧已经选择收件人-->
+        <div class="selected-recelists">
+          <h4>已选收信人</h4>
+          <ul class="lists-seleced">
+              <li><span class="sxr-name">张三(14602368)</span><span class="sxr-yx">教育学院</span><span class="del">删除</span></li>
+              <li><span class="sxr-name">李四(14602369)</span><span class="sxr-yx">教育学院</span><span class="del">删除</span></li>
+          </ul>
+        </div>
+        <!-- 中间分隔线 -->
+        <div class="divided">
+
+        </div>
+    </div>
+    <script src="../js/jquery-1.10.2.min.js"></script>
+</body>
+</html>
+<script>
+   $(function(){
+      // 鼠标移动到收信人上，显示删除按钮
+       $(".lists-seleced").on({
+           "mouseover": function () {
+               // 删除某个已选收信人
+               $(".del", this).show()
+                  .click(function(){
+                      $(this).parent().remove();
+                  })
+           },
+           "mouseout": function () {
+               $(".del", this).hide();
+           },
+       },"li");
+
+
+       // 全选
+       $(".selectedAll").on("click",".selectAll",function(){
+           if(this.checked){
+               $(".selectSxr").prop("checked", true);
+           }else{
+               $(".selectSxr").prop("checked", false);
+           }
+       });
+
+
+       $(".selectSxr").click(function(){
+           allchk();
+       });
+
+       function allchk(){
+           //选项总个数
+           var chknum = $(".selectSxr").size();
+           // 被选中的选项
+           var chk = 0;
+           $(".selectSxr").each(function () {
+               if($(this).prop("checked")==true){
+                   chk++;
+               }
+           });
+
+           if(chknum == chk){//全选
+               $(".selectAll").prop("checked",true);
+           }else{//不全选
+               $(".selectAll").prop("checked",false);
+           }
+       }
+
+   });
+</script>

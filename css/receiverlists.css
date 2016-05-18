@@ -1,0 +1,133 @@
+.receiverlist-container {
+    position: relative;
+    width: 710px;
+    min-height: 360px;
+    margin: 100px auto;
+    border: 1px solid #D8DCF0;
+    box-sizing: border-box;
+    overflow: hidden
+}
+
+.choose-recelists, .selected-recelists {
+    float: left;
+    width: 352px;
+}
+.choose-recelists {
+    padding: 10px;
+    border-right: 1px solid #D8DCF0;
+}
+.search-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 14px;
+}
+.search-box input {
+    width: 100%;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 30px;
+    color: #bbb;
+    border: none;
+    outline: none;
+}
+.search-box .icon-sousuo {
+    position: absolute;
+    left: 5px;
+    top: 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* 中间收信人*/
+.recelists-box {
+    max-height: 272px;
+    height: 272px;
+    overflow: hidden;
+    font-size: 12px;
+    color: #333;
+}
+.recelists-box li {
+    margin-bottom: 10px;
+}
+
+.recelists-box input,
+.selectAll{
+    width: 25px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+/* 最底部分页 */
+.selectedAll, .page {
+    float: left;
+}
+.selectedAll {
+    margin-right: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+.page .iconfont {
+    font-size: 18px;
+    color: #333;
+    vertical-align: middle;
+}
+.page-prev, .page-next {
+    padding: 5px;
+    border: 1px solid #D8DCF0;
+    border-radius: 4px;
+}
+.page .current {
+    width: 30px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border: 1px solid #D8DCF0;
+    border-radius: 4px;
+}
+.mar-10 {
+  margin-right: 10px;
+}
+.selected-recelists {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.selected-recelists > h4 {
+    font-size: 14px;
+    color: #444;
+    margin-top: 20px;
+    margin-bottom: 14px;
+}
+.lists-seleced {
+    min-height: 300px;
+    overflow: hidden;
+}
+.lists-seleced li {
+    padding: 4px 10px;
+}
+.lists-seleced li:hover {
+    cursor: pointer;
+    background: #EAF2FB;
+}
+.lists-seleced .sxr-name {
+    float: left;
+}
+.lists-seleced .del {
+    float: right;
+    cursor: pointer;
+    color: #2196F3;
+    display: none;
+}
+.lists-seleced .sxr-yx {
+   margin-left: 50px;
+}
+
+.divided {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 9px;
+    height: 58px;
+    margin-left: -3px;
+    margin-top: -29px;
+    background: url("../img/arrow.png") no-repeat center;
+}
