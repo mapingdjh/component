@@ -9,40 +9,34 @@
 </head>
 <body>
     <div class="receiverlist-container">
-        <div class="choose-recelists">
-          <!-- 顶部搜索 -->
+        <!--<div class="choose-recelists">
+          &lt;!&ndash; 顶部搜索 &ndash;&gt;
           <div class="search-box">
               <i class="iconfont icon-sousuo"></i>
               <input type="text" name="search" class="search" placeholder="搜索姓名">
           </div>
 
-          <!-- 中间收信人列表 -->
+
+          &lt;!&ndash; 中间收信人列表 &ndash;&gt;
           <div class="recelists-box">
               <ul>
                   <li>
-                      <input type="checkbox" name="sxr" class="selectSxr" />
-                      <span class="sxr-name">张三</span>
-                      <span class="sxr-name">(14602368)</span>
+                      <label><input type="checkbox" name="sxr" class="selectSxr"/>
+                      <span class="sxr-name" id="2012220047">马平(14602368)</span></label>
                   </li>
                   <li>
-                      <input type="checkbox" name="sxr" class="selectSxr" />
-                      <span class="sxr-name">张三</span>
-                      <span class="sxr-name">(14602368)</span>
-                  </li>
-                  <li>
-                      <input type="checkbox" name="sxr" class="selectSxr" />
-                      <span class="sxr-name">张三</span>
-                      <span class="sxr-stuno">(14602368)</span>
+                      <label><input type="checkbox" name="sxr" class="selectSxr"/>
+                      <span class="sxr-name" id="2012220048">丁家华(14602369)</span></label>
                   </li>
               </ul>
           </div>
-          <!-- 底部全选按钮和分页 -->
+          &lt;!&ndash; 底部全选按钮和分页 &ndash;&gt;
           <div class="page-all">
               <div class="selectedAll">
-                  <input type="checkbox" name="selectAll" class="selectAll" />全选
+                  <input type="checkbox" name="selectAll" class="selectAll" id="selectAll"/><label for="selectAll">全选</label>
               </div>
               <div class="page">
-                  <a href="#" class="page-prev mar-10"><i class="iconfont icon-navigatebefore"></i></a>
+                  <a href="#" class="page-prev mar-10 disabled"><i class="iconfont icon-navigatebefore"></i></a>
                   <a href="#" class="lineto mar-10"><input type="text" class="current" value="1"/></a>
                   <span class="mar-10">/</span>
                   <span class="page-total mar-10">30</span>
@@ -50,70 +44,168 @@
               </div>
           </div>
         </div>
-        <!--右侧已经选择收件人-->
+        &lt;!&ndash;右侧已经选择收件人&ndash;&gt;
         <div class="selected-recelists">
           <h4>已选收信人</h4>
           <ul class="lists-seleced">
-              <li><span class="sxr-name">张三(14602368)</span><span class="sxr-yx">教育学院</span><span class="del">删除</span></li>
-              <li><span class="sxr-name">李四(14602369)</span><span class="sxr-yx">教育学院</span><span class="del">删除</span></li>
+             &lt;!&ndash; <li>
+                  <span class="sxr-name">张三(14602368)</span>
+                  <span class="sxr-yx">教育学院</span>
+                  <span class="del">删除</span>
+              </li>&ndash;&gt;
           </ul>
         </div>
-        <!-- 中间分隔线 -->
+        &lt;!&ndash; 中间分隔线 &ndash;&gt;
         <div class="divided">
 
-        </div>
+        </div>-->
     </div>
     <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/receiver.js"></script>
 </body>
 </html>
 <script>
    $(function(){
-      // 鼠标移动到收信人上，显示删除按钮
-       $(".lists-seleced").on({
-           "mouseover": function () {
-               // 删除某个已选收信人
-               $(".del", this).show()
-                  .click(function(){
-                      $(this).parent().remove();
-                  })
-           },
-           "mouseout": function () {
-               $(".del", this).hide();
-           },
-       },"li");
+
+   // todo 收件人信息列表
+   var dataArr = [
+       {id: "2012220033", name: "wangbiao", depart: "计算机学院"},
+       {id: "2012220034", name: "liuziding", depart: "计算机学院"},
+       {id: "2012220035", name: "wangjun", depart: "计算机学院"},
+       {id: "2012220036", name: "wangchan", depart: "计算机学院"},
+       {id: "2012220037", name: "zhuoxue", depart: "计算机学院"},
+       {id: "2012220047", name: "maping", depart: "计算机学院"},
+       {id: "2012220048", name: "丁家华",  depart: "计算机学院"},
+       {id: "2012220049", name: "machun", depart: "计算机学院"}
+   ];
+
+   // todo 已选收件人信息列表
+   var selectedArr = [
+       {id: "2012220047", name: "maping", depart: "计算机学院"},
+       {id: "2012220048", name: "丁家华",  depart: "计算机学院"},
+       {id: "2012220049", name: "machun", depart: "计算机学院"}
+   ];
+    var pageSize = 5;
+	    total = 33;
+   $(".receiverlist-container").receiver({
+       data: dataArr,
+       toReceiveData: selectedArr,
+       total: total,
+       curPage: 1,
+       pageSize: pageSize,
+	   goToPage: function(curPage){
+	     var start = (curPage - 1) * pageSize;
+		 var end = curPage * pageSize;
+		 end = end >=total? total: end;
+		 // todo请求 start到end之间的数据
+		var dataRequest = [
+			   {id: "2012220012", name: "wangbiao12", depart: "计算机学院"},
+			   {id: "2012220013", name: "wangbiao13", depart: "计算机学院"},
+			   {id: "2012220014", name: "wangbiao14", depart: "计算机学院"},
+			   {id: "2012220015", name: "wangbiao15", depart: "计算机学院"},
+			   {id: "2012220016", name: "wangbiao16", depart: "计算机学院"},
+			   {id: "2012220017", name: "wangbiao17", depart: "计算机学院"},
+			   {id: "2012220018", name: "wangbiao18", depart: "计算机学院"},
+			   {id: "2012220019", name: "wangbiao19", depart: "计算机学院"}
+		   ]; 		   
+	   },
+	   search: function(keyword){
+	     // 根据关键字进行查询
+		 console.log(keyword);
+	   }
+   });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       /*// 鼠标移动到收信人上，显示删除按钮
+
+       var $selectSxr = $(".selectSxr"),
+           $selectedAll = $(".selectedAll");
        // 全选
        $(".selectedAll").on("click",".selectAll",function(){
+           $selectSxr.prop("checked", this.checked);
+           // 获得所有选中收件人信息，在右侧已选收件人列表中显示
+           var infoarr = [];
+           var $selectedSjr = $(".recelists-box :checkbox:checked");
+           $selectedSjr.each(function(i,domEle){
+               console.log(domEle);
+               var id = $(domEle).next().attr("id"),
+                       name = $(this).next().text(),
+                       yx = "计算机学院";
+               infoarr.push({id: id, name: name, yx: yx});
+           });
+
            if(this.checked){
-               $(".selectSxr").prop("checked", true);
+               // 全选
+               //addToRight(id,name,yx);
            }else{
-               $(".selectSxr").prop("checked", false);
+               // 取消全选
+               //removeFormRight(id);
            }
        });
 
 
-       $(".selectSxr").click(function(){
-           allchk();
-       });
-
-       function allchk(){
+       $selectSxr.click(function(){
            //选项总个数
-           var chknum = $(".selectSxr").size();
+           var chknum = $selectSxr.size();
            // 被选中的选项
            var chk = 0;
-           $(".selectSxr").each(function () {
+           $selectSxr.each(function () {
                if($(this).prop("checked")==true){
                    chk++;
                }
            });
+           // 被选中的项和总项目个数相等？
+           chknum === chk?$(".selectAll").prop("checked",true) :  $(".selectAll").prop("checked",false);
 
-           if(chknum == chk){//全选
-               $(".selectAll").prop("checked",true);
-           }else{//不全选
-               $(".selectAll").prop("checked",false);
+
+           // 选中添加到右侧
+           var id = $(this).next().attr("id"),
+                   name = $(this).next().text(),
+                   yx = "计算机学院";
+           //
+           if(this.checked){
+               addToRight(id,name,yx);
+           }else{
+               removeFormRight(id);
            }
+       });
+
+       // 添加到右侧
+       function addToRight(id,stuname,yx){
+           var li = '<li><span class="sxr-name" id="'+id+'">'+stuname+'</span><span class="sxr-yx">'+yx+'</span>'
+                   +'<span class="del">删除</span></li>';
+           $(".lists-seleced").append(li);
+
        }
+
+       /!** 从“已选收信人”中移除“左侧”对应取消选中的收件人 *!/
+       function removeFormRight(id){
+           var listSelected = $(".lists-seleced");
+           $("#"+id, listSelected).parent().remove();
+       }
+
+      */
 
    });
 </script>
