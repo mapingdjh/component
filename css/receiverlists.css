@@ -1,3 +1,7 @@
+label,.selectedAll {
+    cursor: pointer;
+}
+
 .receiverlist-container {
     position: relative;
     width: 710px;
@@ -10,16 +14,25 @@
 
 .choose-recelists, .selected-recelists {
     float: left;
-    width: 352px;
+    width: 354px;
 }
 .choose-recelists {
-    padding: 10px;
+	height: 362px;
     border-right: 1px solid #D8DCF0;
+
+}
+.search-box,
+.recelists-box {
+    padding: 0 10px;
 }
 .search-box {
     position: relative;
     width: 100%;
-    margin-bottom: 14px;
+    
+}
+.hd {
+	margin-top: 10px;
+	margin-bottom: 14px;
 }
 .search-box input {
     width: 100%;
@@ -29,31 +42,42 @@
     color: #bbb;
     border: none;
     outline: none;
+    background: #F7F8FC;
 }
 .search-box .icon-sousuo {
     position: absolute;
-    left: 5px;
+    left: 15px;
     top: 0;
     font-size: 20px;
     cursor: pointer;
 }
 
 /* 中间收信人*/
-.recelists-box {
-    max-height: 272px;
-    height: 272px;
-    overflow: hidden;
-    font-size: 12px;
+.recelists-box ul{
+    max-height: 277px;
+    height: 277px;
+    overflow: auto;
+}
+.recelists-box ul,
+.lists-seleced {
+	font-size: 12px;
     color: #333;
 }
 .recelists-box li {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
-
+.recelists-box li span {
+    display: inline-block;
+    max-width: 150px;
+}
 .recelists-box input,
 .selectAll{
     width: 25px;
     height: 16px;
+    outline: none;
+    *vertical-align: middle;
+}
+.selectAll {
     vertical-align: middle;
 }
 
@@ -61,10 +85,21 @@
 .selectedAll, .page {
     float: left;
 }
+.page-all {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 50%;
+    overflow: hidden;
+	width: 49.9%;
+    padding-top: 5px;
+	padding-bottom: 2px;
+    background: #F7F8FC;
+
+}
+
 .selectedAll {
-    margin-right: 20px;
-    margin-top: 3px;
-    cursor: pointer;
+	margin: 3px 20px 3px 10px;
 }
 .page .iconfont {
     font-size: 18px;
@@ -72,14 +107,19 @@
     vertical-align: middle;
 }
 .page-prev, .page-next {
-    padding: 5px;
+    padding: 2px;
     border: 1px solid #D8DCF0;
     border-radius: 4px;
 }
+.disabled .iconfont {
+    color: #D8DCF0;
+    cursor: default;
+
+}
 .page .current {
-    width: 30px;
-    height: 28px;
-    line-height: 28px;
+    width: 24px;
+    height: 22px;
+    line-height: 22px;
     text-align: center;
     border: 1px solid #D8DCF0;
     border-radius: 4px;
@@ -89,36 +129,54 @@
 }
 .selected-recelists {
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 6px;
+    height: 362px;
+    background: #F7F8FC;
 }
 .selected-recelists > h4 {
-    font-size: 14px;
+    font-size: 16px;
     color: #444;
-    margin-top: 20px;
-    margin-bottom: 14px;
+	margin-top: 16px;
+	margin-bottom: 5px;
 }
 .lists-seleced {
-    min-height: 300px;
-    overflow: hidden;
+    max-height: 277px;
+    overflow: auto;
 }
 .lists-seleced li {
-    padding: 4px 10px;
+    position: relative;
+	height: 28px;
+	line-height: 28px;
+	padding-left: 7px;
+	padding-right: 8px;
+}
+.lists-seleced li span, .recelists-box .sxr-name, .lists-seleced .sxr-yx {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .lists-seleced li:hover {
     cursor: pointer;
     background: #EAF2FB;
 }
+.lists-seleced li:hover .del {
+    display: block;
+}
 .lists-seleced .sxr-name {
     float: left;
+    width: 50%;
 }
 .lists-seleced .del {
     float: right;
+    width: 28px;
     cursor: pointer;
     color: #2196F3;
     display: none;
 }
 .lists-seleced .sxr-yx {
-   margin-left: 50px;
+   float: left;	
+   text-align: center;
+   width: 35%;
 }
 
 .divided {
@@ -127,7 +185,7 @@
     left: 50%;
     width: 9px;
     height: 58px;
-    margin-left: -3px;
+    margin-left: -1px;
     margin-top: -29px;
     background: url("../img/arrow.png") no-repeat center;
 }
