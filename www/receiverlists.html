@@ -81,6 +81,7 @@
 
    // todo 已选收件人信息列表
    var selectedArr = [
+       {id: "2012220012", name: "wangbiao12", depart: "计算机学院"},
        {id: "2012220047", name: "maping", depart: "计算机学院"},
        {id: "2012220048", name: "丁家华",  depart: "计算机学院"},
        {id: "2012220049", name: "machun", depart: "计算机学院"}
@@ -107,7 +108,8 @@
 			   {id: "2012220017", name: "wangbiao17", depart: "计算机学院"},
 			   {id: "2012220018", name: "wangbiao18", depart: "计算机学院"},
 			   {id: "2012220019", name: "wangbiao19", depart: "计算机学院"}
-		   ]; 		   
+		   ];
+        this.setSjrListsData(dataRequest); 		   
 	   },
 	   search: function(keyword){
 	     // 根据关键字进行查询

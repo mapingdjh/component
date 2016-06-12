@@ -33,11 +33,11 @@
                          '<div class="page-all">'+
                             '<div class="selectedAll"><input type="checkbox" name="selectAll" class="selectAll" id="selectAll"/><label for="selectAll">全选</label></div>'+
                             '<div class="page">'+
-                               '<a href="#" class="page-prev mar-10"><i class="iconfont icon-navigatebefore"></i></a>'+
-                               '<a href="#" class="lineto mar-10"><input type="text" class="current" value="1"/></a>'+
+                               '<a href="javascript:;" class="page-prev mar-10"><i class="iconfont icon-navigatebefore"></i></a>'+
+                               '<a href="javascript:;" class="lineto mar-10"><input type="text" class="current" value="1"/></a>'+
                                '<span class="mar-10">/</span>'+
                                '<span class="page-total mar-10">30</span>'+
-                               '<a href="#" class="page-next"><i class="iconfont icon-navigatenext"></i></a>'+
+                               '<a href="javascript:;" class="page-next"><i class="iconfont icon-navigatenext"></i></a>'+
                            '</div>'
                      +'</div></div>'
                      +'<div class="selected-recelists"><h4>已选收信人</h4><ul class="lists-seleced"></ul></div>'
@@ -52,8 +52,9 @@
     // 展示左侧收件人列表
     Receiver.prototype.setSjrListsData = function(data){
         var receLists = $(".recelists-box ul");
+		receLists.empty();
         for(var i= 0, len=data.length; i<len; i+=1){
-            var li = '<li><label>';
+            var li = '<li><label>';						
             if(this.isSelected(data[i].id)){
                 li += '<input type="checkbox" name="sxr" class="selectSxr" checked/>'
             }else{
@@ -164,9 +165,8 @@
         });
 
         /** 单选“某个收件人”添加到右侧"已选收件人列表"中显示*/
-        $(".recelists-box li").on("click",".selectSxr",function(){
-            /** 单选按钮和全选按钮联动： 如果被选中的项与总的项目数相等，则全选要勾选*/
-			
+        $(".recelists-box").on("click",".selectSxr",function(){
+            /** 单选按钮和全选按钮联动： 如果被选中的项与总的项目数相等，则全选要勾选*/			
             var btnTotal = $selectSxr.length,      // 当前页选项总数
                 chkCount = 0,                      // 单击复选框被选中项个
 				id = $(this).next().attr("id");    // 对应收件人id
@@ -193,11 +193,11 @@
 			
         });
 		
-        /** 全选按钮，所有的收件人都要添加到右侧‘已选收件人列表中’ */
+        /** 全选按钮，当前页所有的收件人都要添加到右侧‘已选收件人列表中’ */
         $selectedAll.click(function(){
 			if(this.checked){
 				// 全选
-				$selectSxr.prop("checked",this.checked);
+				$(".selectSxr").prop("checked",this.checked);
 			    self.getSelectedSjr($(".recelists-box :checkbox:checked"));
 			}else{
 				// 全不选
@@ -208,7 +208,7 @@
 					infoarr.push(id);
 				});
 				// 所有复选框取消选中
-				$selectSxr.prop("checked",this.checked);
+				$(".selectSxr").prop("checked",this.checked);
 				// 移除右侧所有“已选收件人”
 				self.removeFormRight(infoarr);
 				
