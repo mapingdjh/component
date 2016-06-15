@@ -18,7 +18,6 @@
         this.listData = this.options.data;
         // 已选收件人
         this.toReceiveData = this.options.toReceiveData;
-
         // 生成最外层页面
         this.createDom();
         // 初始化事件
@@ -43,10 +42,10 @@
                      +'<div class="selected-recelists"><h4>已选收信人</h4><ul class="lists-seleced"></ul></div>'
                      +'<div class="divided"></div>'
         this.$element.append(html);
-        // 设置数据“左侧收件人列表”数据
-        this.setSjrListsData(this.listData);
-        // 设置右侧“已选收件人数据”
+		 // 设置右侧“已选收件人数据”
         this.setSelectedData(this.toReceiveData);
+        // 设置数据“左侧收件人列表”数据
+        this.setSjrListsData(this.listData);      
     };
 
     // 展示左侧收件人列表
@@ -54,7 +53,7 @@
         var receLists = $(".recelists-box ul");
 		receLists.empty();
         for(var i= 0, len=data.length; i<len; i+=1){
-            var li = '<li><label>';						
+            var li = '<li><label>';			
             if(this.isSelected(data[i].id)){
                 li += '<input type="checkbox" name="sxr" class="selectSxr" checked/>'
             }else{
@@ -77,16 +76,19 @@
         //this.getSelectedSjr($(".recelists-box :checkbox:checked"));
     };
 
-    // 判断左侧“收件人列表”是否被选中: true: 选中
+    /** 判断左侧“收件人列表”是否被选中: true: 选中*/
     Receiver.prototype.isSelected = function(id){
-        for(var i = 0, len = this.toReceiveData.length; i < len; i+=1){
-            if(id === this.toReceiveData[i].id ){
-                return true;
-            }
-        }
+		// 获得右侧已选收件人列表的pid属性
+		var $sec = $(".lists-seleced .sxr-name");
+		for(var i = 0, len = $sec.length; i < len; i+=1){
+			console.log($sec[i].getAttribute("pid"));
+			if(id === $sec[i].getAttribute("pid")){
+				return true;
+			}		
+		}
     };
 
-    // 展示右侧“已选收件人列表”
+    /** 展示右侧“已选收件人列表” */
     Receiver.prototype.setSelectedData = function(info){
         var $listseleced = $(".lists-seleced"),
 		    $selectedPid; 
@@ -94,7 +96,7 @@
 		    // 判断: 右侧是否已经存在某个收件人,如果已经存在了，全选时无需重复添加到右侧
 			$selectedPid = $(".sxr-name[pid='"+info[i].id+"']",$listseleced).length;
 			if(!$selectedPid){
-				var li = '<li><span class="sxr-name" pid="'+info[i].id+'">'+info[i].name+' ( '+info[i].id+' )'+'</span>'+
+				var li = '<li><span class="sxr-name" name="'+info[i].name+'" pid="'+info[i].id+'">'+info[i].name+' ( '+info[i].id+' )'+'</span>'+
                 '<span class="sxr-yx">'+info[i].depart+'</span>'+
                 '<span class="del">删除</span></li>'
                 $listseleced.append(li);
@@ -148,7 +150,7 @@
         // 更新分页组件中的“当前页面”
         $(".current").val(curpage);
     };
-    
+	
     /** 初始化事件*/
     Receiver.prototype.initEvent = function(){
         var self = this,
@@ -161,7 +163,7 @@
             // 同时于左侧收件人列表中对应的收件人取消勾选
             var pid = $(this).parent().children(".sxr-name").attr("pid");
             // 根据当前删除收信人的id找到左侧对应的收件人，取消勾选
-            $(".recelists-box #"+pid).prev().attr("checked",false);
+            $(".recelists-box #"+pid).prev().attr("checked",false);								
         });
 
         /** 单选“某个收件人”添加到右侧"已选收件人列表"中显示*/
